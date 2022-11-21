@@ -1,2 +1,5 @@
 # VCI data
 data/
+
+# Python virtual environment
+env/
