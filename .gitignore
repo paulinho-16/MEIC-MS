@@ -1,5 +1,11 @@
 # VCI data
-data/
+data/porto_clean.do.xml
+data/porto.net.xml 
+data/porto.rou.xml 
+data/trips.trips.xml 
 
 # Python virtual environment
 env/
+
+# Pycache
+genDo/__pycache__/*
