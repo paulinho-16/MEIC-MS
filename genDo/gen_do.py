@@ -1,8 +1,10 @@
 from xml.dom import minidom     
 import os 
 
-taz_filepath = "./data/porto_clean.taz.xml"
-save_path = "./data/porto_clean.do.xml"
+#taz_filepath = "./data/porto_clean.taz.xml"
+#save_path = "./data/porto_clean.do.xml"
+taz_filepath = "./test/porto.taz.xml"
+save_path = "./test/porto.do.xml"
 
 def read_taz(): 
     f = minidom.parse(taz_filepath)
@@ -51,6 +53,5 @@ if '__main__' == __name__:
             node_interval.appendChild(relation)
 
     xml_str = root.toprettyxml(indent ="\t") 
-    
     with open(save_path, "w") as f:
         f.write(xml_str)
