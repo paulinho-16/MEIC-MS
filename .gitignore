@@ -4,6 +4,13 @@ data/porto.net.xml
 data/porto.rou.xml 
 data/trips.trips.xml 
 
+# VCI sensors data
+data/AEDL2013_2015/
+data/desktop.ini
+data/README AEDL2013-2015.txt
+data/sensors_location.csv
+data/significado campos.txt
+
 # Example 
 example/*
 
