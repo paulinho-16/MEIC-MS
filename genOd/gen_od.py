@@ -22,7 +22,7 @@ def read_taz():
 if '__main__' == __name__:
     with open(save_path, 'w') as od_file:
         od_file.write(start_file)
-        taz = read_taz()
+        taz = read_taz()[:10]
         for origin in taz:
             for destiny in taz:
                 if origin != destiny:

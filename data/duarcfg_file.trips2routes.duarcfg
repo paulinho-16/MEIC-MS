@@ -1,0 +1,10 @@
+<configuration> 
+    <input> 
+        <net-file value="./porto.net.xml"/> 
+        <route-files value="./porto.trips.xml"/>
+    </input>
+
+    <output>
+        <output-file value="./od_route_file.odtrips.rou.xml"/>
+    </output> 
+</configuration> 
