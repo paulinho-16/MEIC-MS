@@ -5,10 +5,7 @@ data/porto.rou.xml
 data/trips.trips.xml 
 
 # Example 
-example/od_route_file.odtrips.rou.alt.xml
-example/od_route_file.odtrips.rou.xml
-example/out.trips.xml
-example/duarcfg_file.trips2routes.duarcfg
+example/*
 
 # Python virtual environment
 env/

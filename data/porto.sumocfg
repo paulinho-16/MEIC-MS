@@ -1,7 +1,7 @@
 <configuration>
     <input>
         <net-file value="porto_clean.net.xml"/>
-        <route-files value="porto.rou.xml"/>
+        <route-files value="od_route_file.odtrips.rou.xml"/>
     </input>
     <time> 
         <begin value="0"/> 
