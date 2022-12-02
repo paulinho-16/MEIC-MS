@@ -8,7 +8,7 @@ DUARCFG = ./data/duarcfg_file.trips2routes.duarcfg
 all: gen_taz gen_od gen_trips gen_path
 
 gen_taz: 
-	@python ./tools/generateTaz.py
+	@python ./tools/gen_taz.py
 
 # TODO: make clean
 gen_od:
@@ -21,6 +21,6 @@ gen_trips:
 gen_path:
 	@duarouter -c $(DUARCFG) --ignore-errors
 
-clean: 
+clean:
 	@echo "Removing files..."
 	@rm -f ./data/porto.trips.xml ./data/porto.taz.xml ./data/porto.od ./data/*.rou.xml ./data/*.rou.alt.xml
