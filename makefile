@@ -8,7 +8,7 @@ DUARCFG = ./data/duarcfg_file.trips2routes.duarcfg
 all: gen_taz gen_od gen_trips gen_path
 
 gen_taz: 
-	@python ./tools/gen_taz.py
+	@python ./genOd/gen_taz.py
 
 # TODO: make clean
 gen_od:

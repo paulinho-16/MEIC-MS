@@ -14,7 +14,6 @@ start_file = """$O;D2
 * comments
 """
 
-
 def read_taz(): 
     f = minidom.parse(taz_filepath)
     return f.getElementsByTagName("taz")
