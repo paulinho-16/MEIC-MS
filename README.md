@@ -28,7 +28,7 @@ netconvert --osm porto.osm -o porto_1.net.xml --remove-edges.isolated true --rem
 
 ## Generating the routes
 ```bash
-python tools/randomTrips.py -n porto_clean.net.xml -r porto.rou.xml -e 50 -l
+python tools/randomTrips.py -n data/porto_clean.net.xml -r data/porto.rou.xml -e 50 -l
 ```
 
 The arguments are: 

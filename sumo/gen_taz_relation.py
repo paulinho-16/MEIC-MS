@@ -1,4 +1,4 @@
-from xml.dom import minidom     
+from xml.dom import minidom
 import os 
 
 #taz_filepath = "./data/porto_clean.taz.xml"
