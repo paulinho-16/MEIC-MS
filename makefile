@@ -33,6 +33,6 @@ clean:
 netconvert:
 	netconvert --osm ./data/porto.osm -o ./data/porto_1.net.xml --remove-edges.isolated true --remove-edges.by-vclass private,emergency,authority,army,vip,pedestrian,hov,coach,delivery,moped,bicycle,evehicle,tram,rail_urban,rail,rail_electric,rail_fast,ship
 
-# Remove edges decoupled from the network 
+# Remove edges decoupled from the network and losing nodes
 clean_net: 
 	netconvert -s ./data/porto_1.net.xml -o ./data/porto_2.net.xml --remove-edges.isolated true 

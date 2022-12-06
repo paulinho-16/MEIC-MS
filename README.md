@@ -20,10 +20,17 @@ It has the following format:
 # Commands 
 
 ## netconvert
-Converts the osm file to the net. 
+### Generate network
+**Converts the osm file to the net**. 
 
 ```bash
 netconvert --osm porto.osm -o porto_1.net.xml --remove-edges.isolated true --remove-edges.by-vclass private,emergency,authority,army,vip,pedestrian,hov,coach,delivery,moped,bicycle,evehicle,tram,rail_urban,rail,rail_electric,rail_fast,ship
+```
+### Clean network 
+The same command can be used to clean the network by removing decoupled edges and losing nodes.
+
+```bash 
+netconvert -s ./data/porto_1.net.xml -o ./data/porto_2.net.xml --remove-edges.isolated true 
 ```
 
 ## Generating the routes
