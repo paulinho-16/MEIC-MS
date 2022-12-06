@@ -19,6 +19,13 @@ It has the following format:
 
 # Commands 
 
+## netconvert
+Converts the osm file to the net. 
+
+```bash
+netconvert --osm porto.osm -o porto_1.net.xml --remove-edges.isolated true --remove-edges.by-vclass private,emergency,authority,army,vip,pedestrian,hov,coach,delivery,moped,bicycle,evehicle,tram,rail_urban,rail,rail_electric,rail_fast,ship
+```
+
 ## Generating the routes
 ```bash
 python tools/randomTrips.py -n porto_clean.net.xml -r porto.rou.xml -e 50 -l
