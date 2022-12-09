@@ -3,7 +3,7 @@ import sumolib
 from xml.dom import minidom
 import re
 
-complete_net_file = "./data/porto_clean_laterals.net.xml"   # Netfile with more than the vci
+complete_net_file = "./data/porto_clean_laterals.net.xml"   # Netfile with more than the VCI
 route_file = "./data/porto.rou.xml"                         # output
 od_filepath = "./data/porto.od"                             # OD file 
 
