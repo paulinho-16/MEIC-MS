@@ -5,7 +5,7 @@ DUARCFG = ./data/duarcfg_file.trips2routes.duarcfg
 
 .PHONY: all 
 
-all: gen_taz gen_od gen_trips gen_path
+all: gen_taz gen_od gen_trips gen_path gen_routes
 
 gen_taz: 
 	@python ./sumo/gen_taz.py
@@ -20,9 +20,12 @@ gen_trips:
 gen_path:
 	@duarouter -c $(DUARCFG) --ignore-errors
 
+gen_routes:
+	@python ./sumo/gen_routes.py
+
 clean:
 	@echo "Removing files..."
-	@rm -f ./data/porto.trips.xml ./data/porto.taz.xml ./data/porto.od ./data/*.rou.xml ./data/*.rou.alt.xml
+	@rm -f ./data/porto.trips.xml ./data/porto.taz.xml ./data/porto.od ./data/*.rou.xml ./data/*.rou.alt.xml 
 
 
 # OTHERS =======================================================================================================
