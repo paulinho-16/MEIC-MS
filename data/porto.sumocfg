@@ -1,6 +1,6 @@
 <configuration>
     <input>
-        <net-file value="porto_clean.net.xml"/>
+        <net-file value="porto_clean_laterals.net.xml"/>
         <route-files value="porto.rou.xml"/>
         <additional-files value="porto.add.xml"/>
     </input>

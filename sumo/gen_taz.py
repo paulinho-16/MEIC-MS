@@ -1,5 +1,5 @@
 import sumolib
-net = sumolib.net.readNet('./data/porto_clean.net.xml')
+net = sumolib.net.readNet('./data/porto_clean_laterals.net.xml')
 
 # create TAZ xml file
 taz = open('./data/porto.taz.xml', 'w')
