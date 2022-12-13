@@ -1,7 +1,7 @@
 import random
 import sumolib
 from xml.dom import minidom
-import re
+from termcolor import colored
 
 complete_net_file = "./data/porto_clean_laterals.net.xml"   # Netfile with more than the VCI
 route_file = "./data/porto.rou.xml"                         # output
@@ -29,8 +29,8 @@ def gen_route(net, nodes):
     incoming_edge = net.getNode(nodes[1]).getIncoming()
     incoming_edge_random = get_random(incoming_edge)
 
-    print(f"incoming:: {incoming_edge} outgoing:: {outgoing_edge}") 
     path_edges = net.getFastestPath(outgoing_edge_random, incoming_edge_random)[0]
+
     # Get path 
     for edge in path_edges:
         route_path += edge.getID() + " "
@@ -71,12 +71,14 @@ if '__main__' == __name__:
     routes = doc.createElement("routes")
     net = sumolib.net.readNet(complete_net_file)
     od_file = read_od()
-    
-    print(f" ODFILE {od_file}")
 
     for id in range(500):
-        route = gen_route(net, random.sample(od_file, 1)[0])
-        
+        try: 
+            route = gen_route(net, random.sample(od_file, 1)[0])
+        except Exception as e: 
+            print(colored(f"[ERR] Not possible generate path, skipping...:: {e}", "yellow"))
+            continue
+
         vehicle = gen_vehicle(id)
         vehicle.appendChild(route)
         routes.appendChild(vehicle)
