@@ -13,6 +13,7 @@ start_file = """$O;D2
 * some
 * additional
 * comments
+* start
 """
 
 def read_taz(): 
@@ -43,7 +44,7 @@ def generate_od(nodes):
         for origin in entry_nodes:
             for destination in exit_nodes:
                 if origin != destination:
-                    print(f"{origin} {destination}")
+                    #print(f"{origin} {destination}")
                     od_file.write(f"\t\t{origin}   {destination}   1\n")
 
 if '__main__' == __name__:
