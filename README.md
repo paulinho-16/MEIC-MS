@@ -20,8 +20,12 @@ It has the following format:
 # Commands 
 
 ## netconvert
+
 ### Generate network
-**Converts the osm file to the net**. 
+
+Converts the osm file to network and performs the following tasks:
+- Remove isolated edges (edges without connection); 
+- Remove edges that doesn't allow passengers (a default car). 
 
 ```bash
 netconvert --osm porto.osm -o porto_1.net.xml --remove-edges.isolated true --remove-edges.by-vclass private,emergency,authority,army,vip,pedestrian,hov,coach,delivery,moped,bicycle,evehicle,tram,rail_urban,rail,rail_electric,rail_fast,ship
@@ -33,7 +37,14 @@ The same command can be used to clean the network by removing decoupled edges an
 netconvert -s ./data/porto_1.net.xml -o ./data/porto_2.net.xml --remove-edges.isolated true 
 ```
 
-## Generating the routes
+## Duarouter: fix paths 
+It might happen that the script creates wrong paths, where exists at least one pair of consecutive edges that doesn't have connection between them. To fix this, we use duarouter command: 
+
+```bash
+duarouter --net-file ./data/porto_clean_laterals.net.xml --route-files porto_rou.xml --repair -o output
+```
+
+## RandomTrips: generating the random routes
 ```bash
 python tools/randomTrips.py -n data/porto_clean.net.xml -r data/porto.rou.xml -e 50 -l
 ```
@@ -43,14 +54,8 @@ The arguments are:
 - `-e`: is the end time;
 - `-l`: weight edge probability by length; 
 
-## Generate O/D Matrixes from routes and Taz file
+## route2OD.py: Generate O/D Matrixes from routes and Taz file
 
 ```bash 
 python tools/route2OD.py -r <route-file> -a <taz-file> -o <output-file>
-```
-
-## Generate brute force Matrix from Taz file 
-
-```bash
-python -m genDo.gen_do
 ```
