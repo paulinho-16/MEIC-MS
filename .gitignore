@@ -18,6 +18,7 @@ example/*
 
 # Python virtual environment
 env/
+venv/
 
 # Pycache
 genDo/__pycache__/*
