@@ -1,0 +1,28 @@
+<additional>
+  <inductionLoop id="121725" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121726" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121727" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121729" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121730" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121737" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121738" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121731" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121732" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121733" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121734" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121735" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121736" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121741" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121742" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121743" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121746" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121749" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121750" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121751" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121752" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121754" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121755" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121756" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121745" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+  <inductionLoop id="121744" lane="foo_0" pos="42" period="300" file="simulation.out.xml"/>
+</additional>

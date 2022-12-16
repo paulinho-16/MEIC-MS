@@ -2,10 +2,17 @@
     <input>
         <net-file value="porto_clean_laterals.net.xml"/>
         <route-files value="porto.rou.xml"/>
-        <additional-files value="reroute.add.xml"/>
+        <additional-files value="reroute.add.xml,speed_signs.add.xml,detectors.add.xml,vehicle_types.add.xml"/>
     </input>
-    <time> 
+    <time>
         <begin value="0"/> 
         <end value="1e6"/> 
     </time>
+    <processing>
+        <time-to-teleport value="0"/>
+    </processing>
+    <report>
+        <no-duration-log value="true"/>
+        <no-step-log value="true"/>
+    </report>
 </configuration>
