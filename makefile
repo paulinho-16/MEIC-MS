@@ -2,7 +2,7 @@ DATA_PATH = ./data
 TAZ = $(DATA_PATH)/porto.taz.xml 
 OD = $(DATA_PATH)/porto.od
 TRIP = $(DATA_PATH)/porto.trips.xml
-NET = $(DATA_PATH)/porto_clean_laterals.net.xml
+NET = $(DATA_PATH)/porto_2.net.xml
 ROU = $(DATA_PATH)/porto.rou.xml
 
 .PHONY: all 
