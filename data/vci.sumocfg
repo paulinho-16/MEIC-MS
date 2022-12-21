@@ -2,11 +2,11 @@
     <input>
         <net-file value="vci.net.xml"/>
         <route-files value="vci.rou.xml"/>
-        <additional-files value="reroute.add.xml"/>
+        <additional-files value="reroute.add.xml,detectors.add.xml"/>
     </input>
     <time>
         <begin value="0"/> 
-        <end value="1e6"/> 
+        <end value="1e3"/> 
     </time>
     <processing>
         <time-to-teleport value="0"/>

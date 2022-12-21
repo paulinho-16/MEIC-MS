@@ -42,7 +42,7 @@ netconvert:
 
 # Remove edges decoupled from the network and losing nodes
 clean_net: 
-	netconvert -s ./data/porto_1.net.xml -o ./data/porto_2.net.xml --remove-edges.isolated true 
+	netconvert -s ./data/vci.net.xml -o ./data/porto_2.net.xml --remove-edges.isolated true 
 
 # NET TRIPS ========================================================================================================
 process_trip: gen_trips gen_paths 

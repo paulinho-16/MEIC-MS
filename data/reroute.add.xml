@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <additionals>
     <rerouter id="rerouter_0" edges="405899851">
-        <interval end="1e6">
+        <interval end="1e3">
            <destProbReroute id="478882416"/>
         </interval>
     </rerouter>
     <rerouter id="rerouter_1" edges="478882416">
-        <interval end="1e6">
+        <interval end="1e3">
            <destProbReroute id="405899851"/>
         </interval>
     </rerouter>
 	<rerouter id="rerouter_2" edges="478882411">
-        <interval end="1e6">
+        <interval end="1e3">
            <destProbReroute id="4302771"/>
         </interval>
     </rerouter>
 	<rerouter id="rerouter_3" edges="4302771">
-        <interval end="1e6">
+        <interval end="1e3">
            <destProbReroute id="478882411"/>
         </interval>
     </rerouter>
