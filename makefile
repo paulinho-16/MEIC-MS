@@ -1,9 +1,9 @@
 DATA_PATH = ./data
-TAZ = $(DATA_PATH)/porto.taz.xml 
-OD = $(DATA_PATH)/porto.od
-TRIP = $(DATA_PATH)/porto.trips.xml
-NET = $(DATA_PATH)/porto_2.net.xml
-ROU = $(DATA_PATH)/porto.rou.xml
+TAZ = $(DATA_PATH)/vci.taz.xml 
+OD = $(DATA_PATH)/vci.od
+TRIP = $(DATA_PATH)/vci.trips.xml
+NET = $(DATA_PATH)/vci.net.xml
+ROU = $(DATA_PATH)/vci.rou.xml
 
 .PHONY: all 
 
@@ -28,7 +28,7 @@ repair_paths:
 
 clean:
 	@echo "Removing files..."
-	@rm -f ./data/porto.trips.xml ./data/porto.taz.xml ./data/porto.od ./data/*.rou.xml ./data/*.rou.alt.xml 
+	@rm -f ./data/vci.trips.xml ./data/vci.taz.xml ./data/vci.od ./data/*.rou.xml ./data/*.rou.alt.xml 
 
 
 # PROCESS_NET =======================================================================================================
@@ -38,7 +38,7 @@ clean:
 process_net: netconvert clean_net
 
 netconvert:
-	netconvert --osm ./data/porto.osm -o ./data/porto_1.net.xml --remove-edges.isolated true --remove-edges.by-vclass private,emergency,authority,army,vip,pedestrian,hov,coach,delivery,moped,bicycle,evehicle,tram,rail_urban,rail,rail_electric,rail_fast,ship
+	netconvert --osm ./data/vci.osm -o ./data/vci.net.xml --remove-edges.isolated true --remove-edges.by-vclass private,emergency,authority,army,vip,pedestrian,hov,coach,delivery,moped,bicycle,evehicle,tram,rail_urban,rail,rail_electric,rail_fast,ship
 
 # Remove edges decoupled from the network and losing nodes
 clean_net: 

@@ -1,10 +1,10 @@
 # VCI data
 data/od_route_file.odtrips.rou.alt.xml
 data/od_route_file.odtrips.rou.xml
-data/porto.od
-data/porto.taz.xml
-data/porto.trips.xml
-data/porto.rou.xml
+data/vci.od
+data/vci.taz.xml
+data/vci.trips.xml
+data/vci.rou.xml
 
 # VCI sensors data
 data/AEDL2013_2015/

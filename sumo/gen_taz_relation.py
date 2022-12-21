@@ -1,10 +1,7 @@
 from xml.dom import minidom
-import os 
 
-#taz_filepath = "./data/porto_clean.taz.xml"
-#save_path = "./data/porto_clean.do.xml"
-taz_filepath = "./data/porto.taz.xml"
-save_path = "./data/porto.do.xml"
+taz_filepath = "./data/vci.taz.xml"
+save_path = "./data/vci.do.xml"
 
 def read_taz(): 
     f = minidom.parse(taz_filepath)
@@ -34,7 +31,6 @@ def gen_node_taz_relation(root, count, from_, to):
     taz_relation.setAttribute("from", from_)
     taz_relation.setAttribute("to", to)
     return taz_relation
-
 
 if '__main__' == __name__: 
     taz = read_taz()

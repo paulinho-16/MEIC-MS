@@ -1,7 +1,7 @@
 <configuration> 
     <input> 
-        <net-file value="./porto_clean.net.xml"/> 
-        <route-files value="./porto.trips.xml"/>
+        <net-file value="./vci.net.xml"/> 
+        <route-files value="./vci.trips.xml"/>
     </input>
 
     <output>

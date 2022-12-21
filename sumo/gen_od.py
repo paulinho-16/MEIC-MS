@@ -1,9 +1,9 @@
 import sumolib
 from xml.dom import minidom 
 
-taz_filepath = "./data/porto.taz.xml"
-save_path = "./data/porto.od"
-complete_net_file = "./data/porto_clean.net.xml"   # Netfile with more than the VCI
+taz_filepath = "./data/vci.taz.xml"
+save_path = "./data/vci.od"
+complete_net_file = "./data/porto_clean.net.xml"   # Netfile with complete VCI road network
 start_file = """$O;D2
 * From-Time To-Time
 0.00 1.00
@@ -44,7 +44,6 @@ def generate_od(nodes):
         for origin in entry_nodes:
             for destination in exit_nodes:
                 if origin != destination:
-                    #print(f"{origin} {destination}")
                     od_file.write(f"\t\t{origin}   {destination}   1\n")
 
 if '__main__' == __name__:

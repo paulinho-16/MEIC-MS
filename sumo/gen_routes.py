@@ -3,9 +3,9 @@ import sumolib
 from xml.dom import minidom
 from termcolor import colored
 
-complete_net_path = "./data/porto_2.net.xml"   # Netfile with more than the VCI
-route_path = "./data/porto.rou.xml"            # output
-od_path = "./data/porto.od"                    # OD file 
+complete_net_path = "./data/vci.net.xml"     # Netfile with complete VCI road network
+route_path = "./data/vci.rou.xml"            # output
+od_path = "./data/vci.od"                    # OD file 
 reroute_path = "./data/reroute.add.xml"
 mandatory_edge_1 = "405899851"
 mandatory_edge_2 = "478882411"
