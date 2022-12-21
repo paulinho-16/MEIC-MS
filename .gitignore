@@ -5,6 +5,7 @@ data/vci.od
 data/vci.taz.xml
 data/vci.trips.xml
 data/vci.rou.xml
+data/VCI/*
 
 # VCI sensors data
 data/AEDL2013_2015/
