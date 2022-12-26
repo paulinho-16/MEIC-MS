@@ -2,9 +2,6 @@
   <inductionLoop id="121725" lane="95367752#0_0" pos="121.94" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121726" lane="460986039_0" pos="111.09" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121727" lane="95367763#1_0" pos="142.24" period="300" file="simulation.out.xml"/>
-  <inductionLoop id="121729" lane="390157760_1" pos="15.40" period="300" file="simulation.out.xml"/>
-  <inductionLoop id="121730" lane="390157764_0" pos="12.84" period="300" file="simulation.out.xml"/>
-  <inductionLoop id="121737" lane="29043516_0" pos="31.65" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121738" lane="95984874_0" pos="90.16" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121731" lane="35384499#0_0" pos="4.22" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121732" lane="478886770_1" pos="51.30" period="300" file="simulation.out.xml"/>
@@ -16,13 +13,9 @@
   <inductionLoop id="121742" lane="479181126_0" pos="144.63" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121743" lane="738884710_0" pos="97.91" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121746" lane="95127165#5_0" pos="5.38" period="300" file="simulation.out.xml"/>
-  <inductionLoop id="121749" lane="95163020_0" pos="54.18" period="300" file="simulation.out.xml"/>
-  <inductionLoop id="121750" lane="362138139_0" pos="74.52" period="300" file="simulation.out.xml"/>
   <!-- <inductionLoop id="121751" lane="362138139_0" pos="74.52" period="300" file="simulation.out.xml"/> -->
-  <inductionLoop id="121752" lane="232721629#1_0" pos="278.96" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121754" lane="95117810_0" pos="48.58" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121755" lane="95117804_0" pos="295.17" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121756" lane="95374603_0" pos="51.52" period="300" file="simulation.out.xml"/>
   <inductionLoop id="121745" lane="453275800_0" pos="4.65" period="300" file="simulation.out.xml"/>
-  <inductionLoop id="121744" lane="453275808_0" pos="244.38" period="300" file="simulation.out.xml"/>
 </additional>
