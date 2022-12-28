@@ -16,13 +16,13 @@ def gen_root():
 def get_random(l: list): 
     return l[random.randrange(len(l))]
     
-def gen_vehicle(id : str):
+def gen_vehicle(id : str, doc):
     vehicle = doc.createElement("vehicle")
     vehicle.setAttribute("id", str(id))
     vehicle.setAttribute("depart", "{:.2f}".format(id))
     return vehicle
         
-def create_rerouter_element(origin, destination, index, additionals): 
+def create_rerouter_element(origin, destination, index, additionals, doc): 
     rerouter = doc.createElement("rerouter")
     rerouter.setAttribute("id", f"rerouter_{index}")
     rerouter.setAttribute("edges", f"{origin}")
@@ -34,7 +34,7 @@ def create_rerouter_element(origin, destination, index, additionals):
     rerouter.appendChild(interval)
     additionals.appendChild(rerouter)
 
-def gen_route(net, nodes):
+def gen_route(net, nodes, doc):
     route_path = ""
     
     # Get edges from nodes 
@@ -43,12 +43,13 @@ def gen_route(net, nodes):
     incoming_edge = net.getNode(nodes[1]).getIncoming()
     incoming_edge_random = get_random(incoming_edge)
     
-    mandatory_edge = net.getEdge(mandatory_edge_1) if random.random() > 0.5 else net.getEdge(mandatory_edge_2)
+    # mandatory_edge = net.getEdge(mandatory_edge_1) if random.random() > 0.5 else net.getEdge(mandatory_edge_2)
+    # path_edges = net.getShortestPath(outgoing_edge_random, mandatory_edge)[0]
+    # path_edges += net.getShortestPath(mandatory_edge, incoming_edge_random)[0][1:]
 
-    path_edges = net.getShortestPath(outgoing_edge_random, mandatory_edge)[0]
-    path_edges += net.getShortestPath(mandatory_edge, incoming_edge_random)[0][1:]
+    path_edges = net.getShortestPath(outgoing_edge_random, incoming_edge_random)[0]
 
-    # Get path 
+    # Get path
     for edge in path_edges:
         route_path += edge.getID() + " "
 
@@ -82,28 +83,32 @@ def read_od():
     od = od[find_od_start(od):]
     return list(map(lambda x: x.split(), od))
 
-
-if '__main__' == __name__:
+def gen_routes():
     doc = gen_root()
     routes = doc.createElement("routes")
     net = sumolib.net.readNet(complete_net_path)
     od_file = read_od()
-    # hash to build the circular file
-    hash_reroute = {}
+    vehicle_id = 0
 
-    for id in range(500):
+    # TODO: to select a different entry for each vehicle, if we think it's necessary
+    for [origin, destination, num_cars] in od_file:
         try:
-            nodes = random.sample(od_file, 1)[0]
-            [route, route_list] = gen_route(net, nodes)
+            [route, _] = gen_route(net, [origin, destination], doc)
         except Exception as e: 
             print(colored(f"[ERR] Not possible generate path, skipping...:: {e}", "yellow"))
             continue
 
-        vehicle = gen_vehicle(id)
-        vehicle.appendChild(route)
-        routes.appendChild(vehicle)
+        num_cars = int(num_cars)
+        for i in range(num_cars):
+            vehicle = gen_vehicle(vehicle_id, doc)
+            vehicle.appendChild(route)
+            routes.appendChild(vehicle)
+            vehicle_id += 1
 
     doc.appendChild(routes)
 
     with open(route_path, "w") as f:
         doc.writexml(f, indent='\t', addindent='\t', newl='\n', encoding="UTF-8")
+
+if '__main__' == __name__:
+    gen_routes()
