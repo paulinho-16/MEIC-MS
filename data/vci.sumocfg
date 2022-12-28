@@ -2,7 +2,7 @@
     <input>
         <net-file value="vci.net.xml"/>
         <route-files value="vci.rou.xml"/>
-        <additional-files value="reroute.add.xml,detectors.add.xml"/>
+        <additional-files value="detectors.add.xml"/>
     </input>
     <time>
         <begin value="0"/> 
