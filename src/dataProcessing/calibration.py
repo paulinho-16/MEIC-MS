@@ -2,8 +2,9 @@ import pandas as pd
 import sumolib
 import subprocess
 from sklearn.metrics import mean_absolute_error
-from ..sumo import gen_od
-from ..sumo import gen_routes 
+from .hill_climbing import hill_climbing
+from ..sumo.utils import read_od_dict
+from ..sumo.utils import read_routes_file
 
 clean_net_file = "./data/porto_clean.net.xml"
 
@@ -40,23 +41,29 @@ def calculate_error(real_data, simulation_data):
     
     return total_error
 
-if '__main__' == __name__:
-    od_values = [1 for _ in range(1666)]
-    
-    # TODO: loop de IA para correr várias vezes e calibrar
+def evaluate() -> float:
+    p = subprocess.Popen(("sumo.exe", "./data/vci.sumocfg"))
+    p.wait()
 
-    net = sumolib.net.readNet(clean_net_file)
-    nodes = net.getNodes()
-    gen_od.generate_od(nodes, od_values)
-    gen_routes.gen_routes()
-    subprocess.call(["make", "repair_paths"])
-
-    subprocess.call(["sumo.exe", "./data/vci.sumocfg"])
-
-    subprocess.call(["make", "data"])
+    p = subprocess.Popen(("make", "data"))
+    p.wait()
 
     real_data = pd.read_csv("./data/AEDL2013_2015/1P2015AEDL_MorningRushHour.csv", sep=",")
     simulation_data = pd.read_csv("./data/Simulation/1P2015AEDL_MorningRushHour.csv", sep=",")
 
     total_error = calculate_error(real_data, simulation_data)
     print(f"Total error: {total_error}")
+    
+    return total_error
+
+if '__main__' == __name__:
+    net = sumolib.net.readNet(clean_net_file)
+    nodes = net.getNodes()
+    
+    od = read_od_dict()
+    routes = read_routes_file()
+    
+    p = subprocess.Popen(("make", "repair_paths"))
+    p.wait()
+
+    best_od_values = hill_climbing(routes, od, evaluate)
