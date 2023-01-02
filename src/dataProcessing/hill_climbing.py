@@ -1,11 +1,14 @@
+import time
 import random
+import warnings
 import numpy as np
 
 from ..sumo.gen_routes import gen_routes
 from ..sumo.gen_od  import generate_od2
+from ..sumo.utils import read_od_dict
 
 from docplex.mp.model import Model
-from scipy.optimize import dual_annealing, minimize
+import scipy.optimize as optimize
 
 def random_search(routes, od_values: dict, evaluate_function):
     curr_od_values = od_values.copy()
@@ -67,6 +70,42 @@ def hill_climbing(routes, od_values: dict, evaluate_function):
             generate_od2(od_values)
 
     return od_values, curr_error
+
+class TookTooLong(Warning):
+    pass
+
+class MinimizeStopper(object):
+    def __init__(self, max_sec=60):
+        self.max_sec = max_sec
+        self.start = time.time()
+    def __call__(self, xk=None):
+        elapsed = time.time() - self.start
+        if elapsed > self.max_sec:
+            warnings.warn("Terminating optimization: time limit reached",
+                          TookTooLong)
+        else:
+            # you might want to report other stuff here
+            print("Elapsed: %.3f sec" % elapsed)
+
+def optimize_search(routes, evaluate_function):
+    initial_values = read_od_dict('./data/best_solution.od')
+    ods, initial_guess = zip(*initial_values.items())
+    initial_guess = list(map(int, initial_guess))
+
+    result = optimize.minimize(evaluate_function, initial_guess, args=(ods, routes), callback=MinimizeStopper(1E-3))
+
+    if result.success:
+        print('AQUIIIII')
+        fitted_params = result.x
+        print(fitted_params)
+
+        with open('./data/solution.txt', 'w+') as sol_file:
+            for i, od in enumerate(ods):
+                sol_file.write(f"{od} {fitted_params[i]}\n")
+    else:
+        raise ValueError(result.message)
+
+    return None, None
 
 # TODO: unused
 def algorithm(routes, od_values: dict, evaluate_function):

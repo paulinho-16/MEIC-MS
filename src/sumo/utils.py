@@ -22,7 +22,7 @@ def find_od_start(od_list):
             return i + 1
     return -1
 
-def read_od(): 
+def read_od(od_path=od_path):
     """
     Read OD FiLe
     """
@@ -31,9 +31,9 @@ def read_od():
     od = od[find_od_start(od):]
     return list(map(lambda x: x.split(), od))
 
-def read_od_dict(): 
+def read_od_dict(od_path=od_path): 
     data = {}
-    od_list = read_od()
+    od_list = read_od(od_path)
 
     for element in od_list:
         origin, destination, num_cars = element

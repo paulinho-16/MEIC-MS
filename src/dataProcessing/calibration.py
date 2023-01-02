@@ -2,10 +2,11 @@ import pandas as pd
 import sumolib
 import subprocess
 from sklearn.metrics import mean_absolute_error
-from .hill_climbing import random_search, hill_climbing, algorithm, algorithm2
+from .hill_climbing import random_search, hill_climbing, optimize_search, algorithm, algorithm2
 from ..sumo.utils import read_od_dict
 from ..sumo.utils import read_routes_file
 from ..sumo.gen_od  import generate_od2
+from ..sumo.gen_routes import gen_routes
 
 clean_net_file = "./data/porto_clean.net.xml"
 
@@ -42,7 +43,13 @@ def calculate_error(real_data, simulation_data):
     
     return total_error
 
-def evaluate() -> float:
+def evaluate(num_cars, ods, routes) -> float:
+    od_values = {}
+    od_values.update(zip(ods, num_cars))
+
+    # Update the routes
+    gen_routes(od_values, routes)
+
     p = subprocess.Popen(("sumo.exe", "./data/vci.sumocfg"))
     p.wait()
 
@@ -68,7 +75,8 @@ if '__main__' == __name__:
     p.wait()
 
     # best_od_values, best_error = hill_climbing(routes, od, evaluate)
-    best_od_values, best_error = random_search(routes, od, evaluate)
-    generate_od2(best_od_values)
+    # best_od_values, best_error = random_search(routes, od, evaluate)
+    best_od_values, best_error = optimize_search(routes, evaluate)
+    # generate_od2(best_od_values)
     # best_od_values = algorithm(routes, od, evaluate)
     # best_od_values = algorithm2(routes, od, evaluate)
