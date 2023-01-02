@@ -2,9 +2,10 @@ import pandas as pd
 import sumolib
 import subprocess
 from sklearn.metrics import mean_absolute_error
-from .hill_climbing import hill_climbing
+from .hill_climbing import random_search, hill_climbing, algorithm, algorithm2
 from ..sumo.utils import read_od_dict
 from ..sumo.utils import read_routes_file
+from ..sumo.gen_od  import generate_od2
 
 clean_net_file = "./data/porto_clean.net.xml"
 
@@ -66,4 +67,8 @@ if '__main__' == __name__:
     p = subprocess.Popen(("make", "repair_paths"))
     p.wait()
 
-    best_od_values = hill_climbing(routes, od, evaluate)
+    # best_od_values, best_error = hill_climbing(routes, od, evaluate)
+    best_od_values, best_error = random_search(routes, od, evaluate)
+    generate_od2(best_od_values)
+    # best_od_values = algorithm(routes, od, evaluate)
+    # best_od_values = algorithm2(routes, od, evaluate)
