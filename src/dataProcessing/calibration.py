@@ -42,14 +42,14 @@ def calculate_error(real_data, simulation_data):
     return total_error
 
 def evaluate() -> float:
-    p = subprocess.Popen(("sumo.exe", "./data/vci.sumocfg"))
+    p = subprocess.Popen(("sumo", "./data/vci.sumocfg"))
     p.wait()
 
     p = subprocess.Popen(("make", "data"))
     p.wait()
 
     real_data = pd.read_csv("./data/AEDL2013_2015/1P2015AEDL_MorningRushHour.csv", sep=",")
-    simulation_data = pd.read_csv("./data/Simulation/1P2015AEDL_MorningRushHour.csv", sep=",")
+    simulation_data = pd.read_csv("./data/simulation/1P2015AEDL_MorningRushHour.csv", sep=",")
 
     total_error = calculate_error(real_data, simulation_data)
     print(f"Total error: {total_error}")
