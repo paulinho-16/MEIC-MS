@@ -40,16 +40,18 @@ def gen_routes(od_values, routes):
     routes_element = doc.createElement("routes")
     vehicle_id = 0
 
-    for orig_dest, num_cars in od_values.items():
+    for orig_dest, num_cars_list in od_values.items():
         route = routes[orig_dest]
 
-        num_cars = int(num_cars)
-        for _ in range(num_cars):
-            vehicle = gen_vehicle(vehicle_id, doc)
-            route_element = gen_route(route, doc)
-            vehicle.appendChild(route_element)
-            routes_element.appendChild(vehicle)
-            vehicle_id += 1
+        for num_cars in num_cars_list:
+            num_cars = int(num_cars)
+            depart_interval = 300/num_cars
+            for _ in range(num_cars):
+                vehicle = gen_vehicle(vehicle_id, doc)
+                route_element = gen_route(route, doc)
+                vehicle.appendChild(route_element)
+                routes_element.appendChild(vehicle)
+                vehicle_id += 1
 
     doc.appendChild(routes_element)
 
