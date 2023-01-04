@@ -12,10 +12,10 @@ mandatory_edge_2 = "478882411"
 def gen_root():
     return minidom.Document()
     
-def gen_vehicle(id : str, doc):
+def gen_vehicle(id: str, depart: int, doc):
     vehicle = doc.createElement("vehicle")
     vehicle.setAttribute("id", str(id))
-    vehicle.setAttribute("depart", "{:.2f}".format(id))
+    vehicle.setAttribute("depart", "{:.2f}".format(depart))
     return vehicle
         
 def create_rerouter_element(origin, destination, index, additionals, doc): 
@@ -43,15 +43,17 @@ def gen_routes(od_values, routes):
     for orig_dest, num_cars_list in od_values.items():
         route = routes[orig_dest]
 
+        depart = 0
         for num_cars in num_cars_list:
             num_cars = int(num_cars)
-            depart_interval = 300/num_cars
+            depart_interval = 300 // num_cars
             for _ in range(num_cars):
-                vehicle = gen_vehicle(vehicle_id, doc)
+                vehicle = gen_vehicle(vehicle_id, depart, doc)
                 route_element = gen_route(route, doc)
                 vehicle.appendChild(route_element)
                 routes_element.appendChild(vehicle)
                 vehicle_id += 1
+                depart += depart_interval
 
     doc.appendChild(routes_element)
 
