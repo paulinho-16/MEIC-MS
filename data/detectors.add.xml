@@ -115,4 +115,3 @@
   <inductionLoop id="121756_10" lane="95374603_0" pos="51.52" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121756_11" lane="95374603_1" pos="51.52" freq="300" file="simulation.out.xml"/>
 </additional>
-<!-- <inductionLoop id="121751" lane="362138139_0" pos="74.52" freq="300" file="simulation.out.xml"/> -->

@@ -1,5 +1,6 @@
 from xml.dom import minidom
 from termcolor import colored
+from queue import PriorityQueue
 
 from .utils import read_routes_file
 
@@ -39,6 +40,7 @@ def gen_routes(od_values, routes):
     doc = gen_root()
     routes_element = doc.createElement("routes")
     vehicle_id = 0
+    vehicle_list = []
 
     for orig_dest, num_cars_list in od_values.items():
         route = routes[orig_dest]
@@ -51,9 +53,13 @@ def gen_routes(od_values, routes):
                 vehicle = gen_vehicle(vehicle_id, depart, doc)
                 route_element = gen_route(route, doc)
                 vehicle.appendChild(route_element)
-                routes_element.appendChild(vehicle)
+                vehicle_list.append((depart, vehicle))
                 vehicle_id += 1
                 depart += depart_interval
+
+        vehicle_list = sorted(vehicle_list, key=lambda x: x[0])
+        for (depart, vehicle) in vehicle_list:
+            routes_element.appendChild(vehicle)
 
     doc.appendChild(routes_element)
 
