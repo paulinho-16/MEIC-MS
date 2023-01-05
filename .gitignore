@@ -8,7 +8,6 @@ data/vci.rou.xml
 data/VCI/*
 
 # VCI sensors data
-data/AEDL2013_2015/
 data/desktop.ini
 data/README AEDL2013-2015.txt
 data/sensors_location.csv
