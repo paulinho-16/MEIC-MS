@@ -1,7 +1,7 @@
 from xml.dom import minidom
 from termcolor import colored
 from queue import PriorityQueue
-
+from tqdm import tqdm
 from .utils import read_routes_file
 
 complete_net_path = "./data/vci.net.xml"     # Netfile with complete VCI road network
@@ -9,6 +9,16 @@ route_path = "./data/vci.rou.xml"            # output
 reroute_path = "./data/reroute.add.xml"
 mandatory_edge_1 = "405899851"
 mandatory_edge_2 = "478882411"
+
+class PQEntry:
+    def __init__(self, value):
+        self.value = value
+
+    def __cmp__(self, other):
+         return cmp(float(self.value.getAttribute("depart")), float(other.value.getAttribute("depart")))
+
+    def __lt__(self, other):
+        return float(self.value.getAttribute("depart")) < float(other.value.getAttribute("depart"))
 
 def gen_root():
     return minidom.Document()
@@ -40,9 +50,9 @@ def gen_routes(od_values, routes):
     doc = gen_root()
     routes_element = doc.createElement("routes")
     vehicle_id = 0
-    vehicle_list = []
+    vehicle_list = PriorityQueue()
 
-    for orig_dest, num_cars_list in od_values.items():
+    for orig_dest, num_cars_list in tqdm(od_values.items()):
         route = routes[orig_dest]
 
         depart = 0
@@ -53,18 +63,18 @@ def gen_routes(od_values, routes):
                 vehicle = gen_vehicle(vehicle_id, depart, doc)
                 route_element = gen_route(route, doc)
                 vehicle.appendChild(route_element)
-                vehicle_list.append((depart, vehicle))
+                vehicle_list.put((depart, PQEntry(vehicle)))
                 vehicle_id += 1
                 depart += depart_interval
 
-        vehicle_list = sorted(vehicle_list, key=lambda x: x[0])
-        for (depart, vehicle) in vehicle_list:
-            routes_element.appendChild(vehicle)
+        for (depart, vehicle) in vehicle_list.queue:
+            routes_element.appendChild(vehicle.value)
 
     doc.appendChild(routes_element)
 
     with open(route_path, "w") as f:
         doc.writexml(f, indent='\t', addindent='\t', newl='\n', encoding="UTF-8")
+    print("written")
 
 if '__main__' == __name__:
     routes = read_routes_file()
