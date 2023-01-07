@@ -50,11 +50,10 @@ def gen_routes(od_values, routes):
     doc = gen_root()
     routes_element = doc.createElement("routes")
     vehicle_id = 0
-    vehicle_list = PriorityQueue()
+    vehicle_list = [] # PriorityQueue()
 
     for orig_dest, num_cars_list in tqdm(od_values.items()):
         route = routes[orig_dest]
-
         depart = 0
         for num_cars in num_cars_list:
             num_cars = int(num_cars)
@@ -63,17 +62,23 @@ def gen_routes(od_values, routes):
                 vehicle = gen_vehicle(vehicle_id, depart, doc)
                 route_element = gen_route(route, doc)
                 vehicle.appendChild(route_element)
-                vehicle_list.put((depart, PQEntry(vehicle)))
+                vehicle_list.append((depart, vehicle)) # vehicle_list.put((depart, PQEntry(vehicle)))
                 vehicle_id += 1
                 depart += depart_interval
 
-        for (depart, vehicle) in vehicle_list.queue:
-            routes_element.appendChild(vehicle.value)
+    print(f"Generated {vehicle_id + 1} vehicles. Now adding vehicles to the routes file")
+
+    # for (depart, vehicle) in vehicle_list.queue:
+    #     routes_element.appendChild(vehicle.value)
+    vehicle_list = sorted(vehicle_list, key=lambda x: x[0])
+    for (depart, vehicle) in vehicle_list:
+        routes_element.appendChild(vehicle)
 
     doc.appendChild(routes_element)
 
     with open(route_path, "w") as f:
         doc.writexml(f, indent='\t', addindent='\t', newl='\n', encoding="UTF-8")
+    
     print("written")
 
 if '__main__' == __name__:
