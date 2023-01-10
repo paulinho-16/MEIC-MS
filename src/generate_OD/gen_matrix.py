@@ -18,7 +18,9 @@ sensor_edges  = set([])
 od_sensors = defaultdict(list)  # {od_in_out: [sensor_id]}, maps what sensors are connected to an edge
 sensor_real_data = defaultdict(list)  # {sensor_id + "_" + direction: [numCars]}, maps the numCars of each sensor across time
 nodes = set([])
-od_num_cars = defaultdict(list) # {od: [numCars1, numCars2,...]}
+od_num_cars = defaultdict(list) # {od: [numCars1, numCars2,...]}, where the [numCars1, numCars2, ...] is the number of cars for each time. 
+od_path = "./data/vci.od"
+
 
 def get_detectors():
     with open ("./data/detectors.add.xml") as f:
@@ -53,11 +55,28 @@ def get_od_value(od):
         m = float('inf')
 
 
+
+def save2od(od_num_cars):
+    """
+    Create a new OD file. 
+    The format is: 
+            origin_destination   num_cars
+
+    Parameters 
+    ----------
+    od_num_cars: dict -> {od: [numCars1, numCars2,...]}, where the [numCars1, numCars2, ...] is the number of cars for each time. 
+    """
+    with open(od_path, 'w') as od_file:
+        for od, values in od_num_cars.items():
+            for value in values:
+                od_file.write(f"\t\t{od}   {value}\n")
+
+
 if __name__ == "__main__":
     routes = read_routes_file()
     get_detectors()
 
-    # Add the sensors of an id
+    # Add the sensors of an od
     for od, route in routes.items():
         for (id, edge) in sensor_edges:
             if edge in route:
@@ -68,11 +87,13 @@ if __name__ == "__main__":
     for _, real_row in real_data.iterrows():
         sensor_real_data[f"{real_row['EQUIPMENTID']}_{real_row['LANE_BUNDLE_DIRECTION']}"].append(real_row["TOTAL_VOLUME"])
         
-    # Add the num_cars.
+    # Add the num_cars
     for od in routes.keys():
         get_od_value(od)
 
-    # Sort, so that 
+    save2od(od_num_cars)
+    
+    # Generate the routes
     gen_routes(od_num_cars, routes)
     error = evaluate()
     print(f'Total Error: {error}')

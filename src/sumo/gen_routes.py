@@ -52,11 +52,12 @@ def gen_routes(od_values, routes):
     vehicle_id = 0
     vehicle_list = [] # PriorityQueue()
 
-    for orig_dest, num_cars_list in tqdm(od_values.items()):
+    for orig_dest, num_cars_list in od_values.items():
         route = routes[orig_dest]
         depart = 0
         for num_cars in num_cars_list:
-            num_cars = int(num_cars)
+            if num_cars == 0:
+                continue
             depart_interval = 300 // num_cars
             for _ in range(num_cars):
                 vehicle = gen_vehicle(vehicle_id, depart, doc)

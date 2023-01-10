@@ -24,7 +24,7 @@ env/
 venv/
 
 # Pycache
+*.pyc
 src/__pycache__/*
 src/dataProcessing/__pycache__
 src/sumo/__pycache__
-src/generate_OD/__pycache__

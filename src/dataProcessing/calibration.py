@@ -2,7 +2,7 @@ import pandas as pd
 import sumolib
 import subprocess
 from sklearn.metrics import mean_absolute_error
-from .hill_climbing import hill_climbing
+from .algorithms import hill_climbing, genetic_algorithm
 from ..sumo.utils import read_od_dict
 from ..sumo.utils import read_routes_file
 
@@ -57,8 +57,8 @@ def evaluate() -> float:
     return total_error
 
 if '__main__' == __name__:
-    net = sumolib.net.readNet(clean_net_file)
-    nodes = net.getNodes()
+    # net = sumolib.net.readNet(clean_net_file)
+    # nodes = net.getNodes()
     
     od = read_od_dict()
     routes = read_routes_file()
@@ -66,4 +66,5 @@ if '__main__' == __name__:
     p = subprocess.Popen(("make", "repair_paths"))
     p.wait()
 
-    best_od_values = hill_climbing(routes, od, evaluate)
+    # best_od_values = hill_climbing(routes, od, evaluate)
+    best_od_values = genetic_algorithm(routes, od, evaluate, 100)
