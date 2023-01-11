@@ -1,28 +1,19 @@
+"""Generates SUMO .rou.xml file.
+
+Returns:
+    _type_: _description_
+"""
+
 from xml.dom import minidom
-from termcolor import colored
-from queue import PriorityQueue
 from tqdm import tqdm
-from .utils import read_routes_file
+from .utils import read_routes_file, read_od_dict
 
-complete_net_path = "./data/vci.net.xml"     # Netfile with complete VCI road network
 route_path = "./data/vci.rou.xml"            # output
-reroute_path = "./data/reroute.add.xml"
-mandatory_edge_1 = "405899851"
-mandatory_edge_2 = "478882411"
 
-class PQEntry:
-    def __init__(self, value):
-        self.value = value
-
-    def __cmp__(self, other):
-         return cmp(float(self.value.getAttribute("depart")), float(other.value.getAttribute("depart")))
-
-    def __lt__(self, other):
-        return float(self.value.getAttribute("depart")) < float(other.value.getAttribute("depart"))
 
 def gen_root():
     return minidom.Document()
-    
+
 def gen_vehicle(id: str, depart: int, doc):
     vehicle = doc.createElement("vehicle")
     vehicle.setAttribute("id", str(id))
@@ -46,11 +37,11 @@ def gen_route(edges, doc):
     route.setAttribute("edges", edges)
     return route
 
-def gen_routes(od_values, routes):
+def gen_routes(od_volume: dict[str, int], od_route: dict[str, str]):
     doc = gen_root()
     routes_element = doc.createElement("routes")
     vehicle_id = 0
-    vehicle_list = [] # PriorityQueue()
+    vehicle_list = [] 
 
     for orig_dest, num_cars_list in od_values.items():
         route = routes[orig_dest]
@@ -82,7 +73,8 @@ def gen_routes(od_values, routes):
     
     print("written")
 
+
 if '__main__' == __name__:
-    routes = read_routes_file()
-    od_values = [0 for _ in range(1000)]
-    gen_routes(od_values, routes)
+    od_routes: dict[str, str] = read_routes_file()
+    od_volume: dict[str, int] = read_od_dict()
+    gen_routes(od_volume, od_routes)

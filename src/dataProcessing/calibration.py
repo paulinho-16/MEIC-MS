@@ -1,12 +1,15 @@
+from configparser import ConfigParser, ExtendedInterpolation
+import logging
 import pandas as pd
-import sumolib
-import subprocess
 from sklearn.metrics import mean_absolute_error
-from .algorithms import hill_climbing, genetic_algorithm
-from ..sumo.utils import read_od_dict
-from ..sumo.utils import read_routes_file
+
 
 clean_net_file = "./data/porto_clean.net.xml"
+
+logging.basicConfig(level=logging.INFO)
+config = ConfigParser(interpolation=ExtendedInterpolation())
+config.read("./src/config.ini")
+
 
 def calculate_error(real_data, simulation_data):
     minute = 0
@@ -42,14 +45,8 @@ def calculate_error(real_data, simulation_data):
     return total_error
 
 def evaluate() -> float:
-    p = subprocess.Popen(("sumo", "./data/vci.sumocfg"))
-    p.wait()
-
-    p = subprocess.Popen(("make", "data"))
-    p.wait()
-
-    real_data = pd.read_csv("./data/AEDL2013_2015/1P2015AEDL_MorningRushHour.csv", sep=",")
-    simulation_data = pd.read_csv("./data/simulation/1P2015AEDL_MorningRushHour.csv", sep=",")
+    real_data = pd.read_csv(config["data"]["REAL_MORNING_FILE"], sep=",")
+    simulation_data = pd.read_csv(config["data"]["SIMULATION_PROCESSED_FILE"], sep=",")
 
     total_error = calculate_error(real_data, simulation_data)
     print(f"Total error: {total_error}")
@@ -57,14 +54,5 @@ def evaluate() -> float:
     return total_error
 
 if '__main__' == __name__:
-    # net = sumolib.net.readNet(clean_net_file)
-    # nodes = net.getNodes()
-    
-    od = read_od_dict()
-    routes = read_routes_file()
-    
-    p = subprocess.Popen(("make", "repair_paths"))
-    p.wait()
+    evaluate()
 
-    # best_od_values = hill_climbing(routes, od, evaluate)
-    best_od_values = genetic_algorithm(routes, od, evaluate, 100)

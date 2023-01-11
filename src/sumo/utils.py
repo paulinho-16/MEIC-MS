@@ -20,7 +20,12 @@ def read_od():
     od = list(map(strip_line, od_lines))
     return list(map(lambda x: x.split(), od))
 
-def read_od_dict(): 
+def read_od_dict() -> dict[str, int]: 
+    """Reads the od file
+
+    Returns:
+        dict[str, str]: Keys as the od_minute (i.e., origin_destination_timestamp), the values as the number of cars
+    """
     data = {}
     od_list = read_od()
 
@@ -33,16 +38,16 @@ def read_od_dict():
             current_od = od
 
         key = od + '_' + str(minute)
-        data[key] = num_cars
+        data[key] = int(num_cars)
         minute += 300
 
     return data
     
-def read_routes_file() -> dict:
+def read_routes_file() -> dict[str, str]:
     """Read the routes file
 
     Returns:
-        dict: The dictionary has the form {origin_destination: [edge1, edge2,...], ...}
+        dict: The dictionary has the form {origin_destination: "edge1 edge2,...", ...}
     """
     f = open(route_txt, "r")
     data = {}
@@ -53,3 +58,6 @@ def read_routes_file() -> dict:
 
     f.close()
     return data
+
+if __name__ == '__main__':
+    print(read_od())
