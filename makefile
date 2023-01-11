@@ -8,7 +8,7 @@ CONFIG = $(DATA_PATH)/vci.sumocfg
 
 .PHONY: all data gen_od
 
-all: gen_od gen_routes repair_paths
+all: gen_od_volume gen_routes calibration
 
 # Generate the origin/destination matrix
 gen_od_volume:
