@@ -96,8 +96,8 @@ def gen_od_volume(sensor_volumes: pd.DataFrame, sensor_ods: dict[str, list[str]]
             continue
         volume_per_od = sensor_volume[0]/total_elements
         for od in od_list:
-            # TODO: multiply by the percentage
-            od_volume[od] += volume_per_od
+            # Multiply the volume by the percentage of vehicles in the network. 
+            od_volume[od] += volume_per_od * float(config["runtime"]["OD_PERCENTAGE"])
     return od_volume
 
 

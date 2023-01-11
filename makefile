@@ -22,8 +22,8 @@ gen_routes:
 
 data:
 	@echo "Processing data..."
-	@python -m src.dataProcessing.real_data
-	@python -m src.dataProcessing.simulation_data
+	@python -m src.dataProcessing.clean_real_data
+	@python -m src.dataProcessing.clean_simulation_data
 	@echo "Data processed!"
 
 # Start the calibration of the VCI model

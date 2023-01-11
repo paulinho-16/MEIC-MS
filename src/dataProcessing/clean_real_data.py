@@ -74,7 +74,7 @@ def group_data(df: pd.DataFrame) -> pd.DataFrame:
 
 
 if '__main__' == __name__:
-    df = pd.read_csv("", sep=",")
+    df = pd.read_csv(config["data"]["REAL_DATA_FILE"], sep=",")
     morning_rush_hour = get_filtered_by_hour(df, "08:00:00", "10:30:00")
     evening_rush_hour = get_filtered_by_hour(df, "17:00:00", "20:00:00")
 
