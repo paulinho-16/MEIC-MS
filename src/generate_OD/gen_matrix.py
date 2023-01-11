@@ -5,13 +5,6 @@ from ..sumo.utils import read_routes_file
 from ..sumo.gen_routes import gen_routes
 from ..dataProcessing.calibration import evaluate
 
-class Nodes:
-    def __init__(self, id_, flow = 0, sensor = -1) -> None:
-        self.children = []
-        self.id = id_
-        self.sensor = sensor
-        self.flow = flow
-
 
 edges = set([])
 sensor_edges  = set([])
