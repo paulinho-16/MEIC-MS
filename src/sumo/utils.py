@@ -39,6 +39,11 @@ def read_od_dict():
     return data
     
 def read_routes_file() -> dict:
+    """Read the routes file
+
+    Returns:
+        dict: The dictionary has the form {origin_destination: [edge1, edge2,...], ...}
+    """
     f = open(route_txt, "r")
     data = {}
     for line in f.readlines():
