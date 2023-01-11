@@ -28,18 +28,9 @@ def read_od_dict() -> dict[str, int]:
     """
     data = {}
     od_list = read_od()
-
-    minute = 0
-    current_od = None
     for element in od_list:
         od, num_cars = element
-        if current_od != od:
-            minute = 0
-            current_od = od
-
-        key = od + '_' + str(minute)
-        data[key] = int(num_cars)
-        minute += 300
+        data[od] = int(num_cars)
 
     return data
     

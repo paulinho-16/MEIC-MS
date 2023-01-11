@@ -1,7 +1,4 @@
 """Generates SUMO .rou.xml file.
-
-Returns:
-    _type_: _description_
 """
 
 from xml.dom import minidom
@@ -43,20 +40,17 @@ def gen_routes(od_volume: dict[str, int], od_route: dict[str, str]):
     vehicle_id = 0
     vehicle_list = [] 
 
-    for orig_dest, num_cars_list in od_values.items():
-        route = routes[orig_dest]
+    for orig_dest, num_cars in od_volume.items():
+        route = od_route[orig_dest]
         depart = 0
-        for num_cars in num_cars_list:
-            if num_cars == 0:
-                continue
-            depart_interval = 300 // num_cars
-            for _ in range(num_cars):
-                vehicle = gen_vehicle(vehicle_id, depart, doc)
-                route_element = gen_route(route, doc)
-                vehicle.appendChild(route_element)
-                vehicle_list.append((depart, vehicle)) # vehicle_list.put((depart, PQEntry(vehicle)))
-                vehicle_id += 1
-                depart += depart_interval
+        depart_interval = 300 // num_cars
+        for _ in range(num_cars):
+            vehicle = gen_vehicle(vehicle_id, depart, doc)
+            route_element = gen_route(route, doc)
+            vehicle.appendChild(route_element)
+            vehicle_list.append((depart, vehicle)) # vehicle_list.put((depart, PQEntry(vehicle)))
+            vehicle_id += 1
+            depart += depart_interval
 
     print(f"Generated {vehicle_id + 1} vehicles. Now adding vehicles to the routes file")
 
