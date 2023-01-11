@@ -11,7 +11,7 @@ all: gen_od gen_routes repair_paths
 
 # Generate the origin/destination matrix
 gen_od:
-	@python -m src.sumo.gen_od
+	@python -m src.generate_OD.gen_od_volume
 
 # Generate the routes
 gen_routes:

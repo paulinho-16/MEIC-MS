@@ -77,7 +77,7 @@ def gen_sensor_ods(sensor_edges: set[tuple[str, str]], routes: dict[str, str]) -
     return sensor_ods
 
 
-def gen_od_volume(sensor_volumes: pd.DataFrame, sensor_ods: dict[str, list]) -> dict[str, float]:
+def gen_od_volume(sensor_volumes: pd.DataFrame, sensor_ods: dict[str, list[str]]) -> dict[str, float]:
     """Distributes the volume of a sensor by each od whose path passes through the sensor.
 
     Args:
@@ -116,7 +116,7 @@ if __name__ == '__main__':
     sensor_volumes: pd.DataFrame = get_volume_per_hour()
     routes: dict[str, str] = read_routes_file()
     sensor_edges: set[tuple[str, str]] = get_sensor_locations()
-    sensor_ods: dict[str, list] = gen_sensor_ods(sensor_edges, routes)
+    sensor_ods: dict[str, list[str]] = gen_sensor_ods(sensor_edges, routes)
     od_volume: dict[str, float] = gen_od_volume(sensor_volumes, sensor_ods)
     logging.info("Saving OD...")
     save2od(od_volume)
