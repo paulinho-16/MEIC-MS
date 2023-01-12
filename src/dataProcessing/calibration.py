@@ -7,7 +7,6 @@ logging.basicConfig(level=logging.INFO)
 config = ConfigParser(interpolation=ExtendedInterpolation())
 config.read("./src/config.ini")
 
-
 def get_simulation_row(real_row: pd.Series, simulation_data: pd.DataFrame, minute: int) -> pd.DataFrame:
     """Generate the simulation row corresponding to the real data row, grouping all the rows of a given direction.
 
@@ -46,6 +45,15 @@ def calculate_error(real_data: pd.DataFrame, simulation_data: pd.DataFrame) -> f
     current_sensor: str = ""
     total_error: float = 0
 
+    start_hour = float(config["runtime"]["HOUR_START"])
+    end_hour = float(config["runtime"]["HOUR_END"])
+    total_minutes: int = int((end_hour - start_hour) * 3600)
+
+    divisors: list[int] = [i for i in range(1, total_minutes + 1) if i % 3600 == 0]
+    if total_minutes % 3600 != 0:
+        divisors.append(total_minutes % 3600)
+    print(divisors)
+
     for _, real_row in real_data.iterrows():
         if current_sensor != real_row["EQUIPMENTID"]:
             current_sensor = real_row["EQUIPMENTID"]
@@ -64,8 +72,12 @@ def calculate_error(real_data: pd.DataFrame, simulation_data: pd.DataFrame) -> f
         simulation_values = [sim_row["nVehContrib"],
                              sim_row["speed"], sim_row["harmonicMeanSpeed"]]
 
-        error: float = mean_absolute_error(real_values, simulation_values)
-        total_error += error
+        if minute in divisors:
+            error: float = mean_absolute_error(real_values, simulation_values)
+            total_error += error
+
+        # error: float = mean_absolute_error(real_values, simulation_values)
+        # total_error += error
 
     return total_error
 
