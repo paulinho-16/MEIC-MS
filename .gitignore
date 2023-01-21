@@ -15,6 +15,7 @@ data/significado campos.txt
 data/AEDL2013_2015/*
 !data/AEDL2013_2015/*_MorningRushHour.csv
 !data/AEDL2013_2015/*_EveningRushHour.csv
+!data/simulation/*
 
 # Example 
 example/*
