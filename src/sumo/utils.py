@@ -12,37 +12,34 @@ def strip_line(line):
     line = line.strip()
     return line
 
-def find_od_start(od_list): 
-    """"
-    Finds where the start and end points are defined in the od file. 
-    This is only possible if there's a comment "* start" right before the start of the origin and destination points. 
-    """
-    for i, v in enumerate(od_list):
-        if v == "* start":
-            return i + 1
-    return -1
-
-def read_od(od_path=od_path):
+def read_od(): 
     """
     Read OD FiLe
     """
     od_lines = open(od_path, "r").readlines()
     od = list(map(strip_line, od_lines))
-    od = od[find_od_start(od):]
     return list(map(lambda x: x.split(), od))
 
-def read_od_dict(od_path=od_path): 
-    data = {}
-    od_list = read_od(od_path)
+def read_od_dict() -> dict[str, int]: 
+    """Reads the od file
 
+    Returns:
+        dict[str, str]: Keys as the od_minute (i.e., origin_destination_timestamp), the values as the number of cars
+    """
+    data = {}
+    od_list = read_od()
     for element in od_list:
-        origin, destination, num_cars = element
-        key = origin + '_' + destination
-        data[key] = num_cars
+        od, num_cars = element
+        data[od] = int(num_cars)
 
     return data
+    
+def read_routes_file() -> dict[str, str]:
+    """Read the routes file
 
-def read_routes_file():
+    Returns:
+        dict: The dictionary has the form {origin_destination: "edge1 edge2,...", ...}
+    """
     f = open(route_txt, "r")
     data = {}
     for line in f.readlines():
@@ -52,3 +49,6 @@ def read_routes_file():
 
     f.close()
     return data
+
+if __name__ == '__main__':
+    print(read_od())

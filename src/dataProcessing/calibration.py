@@ -1,82 +1,101 @@
+from configparser import ConfigParser, ExtendedInterpolation
+import logging
 import pandas as pd
-import sumolib
-import subprocess
 from sklearn.metrics import mean_absolute_error
-from .hill_climbing import random_search, hill_climbing, optimize_search, algorithm, algorithm2
-from ..sumo.utils import read_od_dict
-from ..sumo.utils import read_routes_file
-from ..sumo.gen_od  import generate_od2
-from ..sumo.gen_routes import gen_routes
 
-clean_net_file = "./data/porto_clean.net.xml"
+logging.basicConfig(level=logging.INFO)
+config = ConfigParser(interpolation=ExtendedInterpolation())
+config.read("./src/config.ini")
 
-def calculate_error(real_data, simulation_data):
-    minute = 0
-    current_sensor = ""
-    total_error = 0
+def get_simulation_row(real_row: pd.Series, simulation_data: pd.DataFrame, minute: int) -> pd.DataFrame:
+    """Generate the simulation row corresponding to the real data row, grouping all the rows of a given direction.
+
+    Args:
+        real_row (pd.DataFrame): real data from VCI sensors
+        simulation_data (pd.DataFrame): simulated data from SUMO sensors
+        minute (int): period of 5 min in which the data was collected
+
+    Returns:
+        pd.DataFrame: the corresponding simulation row.
+    """
+    if real_row["LANE_BUNDLE_DIRECTION"] == "D":
+        sim_rows: pd.DataFrame = simulation_data.loc[(simulation_data["id"].str.startswith(str(real_row["EQUIPMENTID"]))) & (
+            (simulation_data["id"].str.split("_").str[1]).str.startswith("1")) & (simulation_data["begin"] == minute)]
+    else:
+        sim_rows: pd.DataFrame = simulation_data.loc[(simulation_data["id"].str.startswith(str(real_row["EQUIPMENTID"]))) & (
+            (simulation_data["id"].str.split("_").str[1]).str.startswith("0")) & (simulation_data["begin"] == minute)]
+
+    # Consider the values of all the lanes in the same direction
+    function_dictionary: dict[str, str] = {
+        'nVehContrib': 'sum', 'speed': 'mean', 'harmonicMeanSpeed': 'mean'}
+    return sim_rows.groupby('begin').agg(function_dictionary).reset_index()
+
+
+def calculate_error(real_data: pd.DataFrame, simulation_data: pd.DataFrame) -> float:
+    """Calculate simulation error based on real data.
+
+    Args:
+        real_data (pd.DataFrame): real data from VCI sensors
+        simulation_data (pd.DataFrame): simulated data from SUMO sensors
+
+    Returns:
+        float: the total error of the simulation.
+    """
+    minute: int = 0
+    current_sensor: str = ""
+    total_error: float = 0
+
+    strategy = int(config["runtime"]["STRATEGY"])
+    if strategy == 2:
+        start_hour = float(config["runtime"]["HOUR_START"])
+        end_hour = float(config["runtime"]["HOUR_END"])
+        total_minutes: int = int((end_hour - start_hour) * 3600)
+
+        divisors: list[int] = [i for i in range(1, total_minutes + 1) if i % 3600 == 0]
+        if total_minutes % 3600 != 0:
+            divisors.append(total_minutes % 3600)
+
     for _, real_row in real_data.iterrows():
         if current_sensor != real_row["EQUIPMENTID"]:
             current_sensor = real_row["EQUIPMENTID"]
-            minute = 0 
+            minute: int = 0
         else:
             minute += 300
-        
-        if real_row["LANE_BUNDLE_DIRECTION"] == "D":
-            sim_rows = simulation_data.loc[(simulation_data["id"].str.startswith(str(real_row["EQUIPMENTID"]))) & ((simulation_data["id"].str.split("_").str[1]).str.startswith("1")) & (simulation_data["begin"] == minute)]
-        else:
-            sim_rows = simulation_data.loc[(simulation_data["id"].str.startswith(str(real_row["EQUIPMENTID"]))) & ((simulation_data["id"].str.split("_").str[1]).str.startswith("0")) & (simulation_data["begin"] == minute)]
 
-        # Consider the values of all the lanes in the same direction
-        function_dictionary = {'nVehContrib': 'sum', 'speed': 'mean', 'harmonicMeanSpeed': 'mean'}
-        sim_rows = sim_rows.groupby('begin').agg(function_dictionary).reset_index()
+        sim_row: pd.DataFrame = get_simulation_row(real_row, simulation_data, minute)
         
-        if sim_rows.empty: # TODO: após ignorar sensores nas entradas/saídas, tirar isto
+        if sim_row.empty: # for real sensors that are not being used in the simulation
             continue
-        
-        sim_row = sim_rows.iloc[0]
 
-        real_values = [real_row["TOTAL_VOLUME"], real_row["AVG_SPEED_ARITHMETIC"], real_row["AVG_SPEED_HARMONIC"]]
-        simulation_values = [sim_row["nVehContrib"], sim_row["speed"], sim_row["harmonicMeanSpeed"]]
+        sim_row: pd.Series = sim_row.iloc[0]
+        real_values = [real_row["TOTAL_VOLUME"],
+                       real_row["AVG_SPEED_ARITHMETIC"], real_row["AVG_SPEED_HARMONIC"]]
+        simulation_values = [sim_row["nVehContrib"],
+                             sim_row["speed"], sim_row["harmonicMeanSpeed"]]
 
-        error = mean_absolute_error(real_values, simulation_values)
-        total_error += error
-    
+        if strategy == 1 or (strategy == 2 and minute in divisors):
+            error: float = mean_absolute_error(real_values, simulation_values)
+            total_error += error
+
     return total_error
 
-def evaluate(num_cars, ods, routes) -> float:
-    od_values = {}
-    od_values.update(zip(ods, num_cars))
 
-    # Update the routes
-    gen_routes(od_values, routes)
+def evaluate() -> float:
+    """Calculate simulation error based on real data.
 
-    p = subprocess.Popen(("sumo.exe", "./data/vci.sumocfg"))
-    p.wait()
+        Returns: 
+            float: Returns the error
+    """
+    real_data: pd.DataFrame = pd.read_csv(
+        config["data"]["REAL_MORNING_FILE"], sep=",")
+    simulation_data: pd.DataFrame = pd.read_csv(
+        config["data"]["SIMULATION_PROCESSED_FILE"], sep=",")
 
-    p = subprocess.Popen(("make", "data"))
-    p.wait()
-
-    real_data = pd.read_csv("./data/AEDL2013_2015/1P2015AEDL_MorningRushHour.csv", sep=",")
-    simulation_data = pd.read_csv("./data/Simulation/1P2015AEDL_MorningRushHour.csv", sep=",")
-
-    total_error = calculate_error(real_data, simulation_data)
+    total_error: float = calculate_error(real_data, simulation_data)
     print(f"Total error: {total_error}")
-    
+
     return total_error
+
 
 if '__main__' == __name__:
-    net = sumolib.net.readNet(clean_net_file)
-    nodes = net.getNodes()
-    
-    od = read_od_dict()
-    routes = read_routes_file()
-    
-    p = subprocess.Popen(("make", "repair_paths"))
-    p.wait()
-
-    # best_od_values, best_error = hill_climbing(routes, od, evaluate)
-    # best_od_values, best_error = random_search(routes, od, evaluate)
-    best_od_values, best_error = optimize_search(routes, evaluate)
-    # generate_od2(best_od_values)
-    # best_od_values = algorithm(routes, od, evaluate)
-    # best_od_values = algorithm2(routes, od, evaluate)
+    evaluate()

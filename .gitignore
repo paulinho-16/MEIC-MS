@@ -8,11 +8,13 @@ data/vci.rou.xml
 data/VCI/*
 
 # VCI sensors data
-data/AEDL2013_2015/
 data/desktop.ini
 data/README AEDL2013-2015.txt
 data/sensors_location.csv
 data/significado campos.txt
+data/AEDL2013_2015/*
+!data/AEDL2013_2015/*_MorningRushHour.csv
+!data/AEDL2013_2015/*_EveningRushHour.csv
 
 # Example 
 example/*
@@ -22,6 +24,7 @@ env/
 venv/
 
 # Pycache
+*.pyc
 src/__pycache__/*
 src/dataProcessing/__pycache__
 src/sumo/__pycache__

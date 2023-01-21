@@ -1,9 +1,4 @@
 <additional>
-  <inductionLoop id="121725_20" lane="95367752#0_0" pos="121.94" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121725_21" lane="95367752#0_1" pos="121.94" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121725_30" lane="839842702_0" pos="1069" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121725_31" lane="839842702_1" pos="1069" freq="300" file="simulation.out.xml"/>
-
   <inductionLoop id="121726_00" lane="460986039_0" pos="111.09" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121726_01" lane="460986039_1" pos="111.09" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121726_02" lane="460986039_2" pos="111.09" freq="300" file="simulation.out.xml"/>
@@ -70,11 +65,6 @@
   <inductionLoop id="121736_11" lane="35047581_1" pos="404.08" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121736_12" lane="35047581_2" pos="404.08" freq="300" file="simulation.out.xml"/>
 
-  <inductionLoop id="121738_00" lane="95984874_0" pos="90.16" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121738_01" lane="95984874_1" pos="90.16" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121738_10" lane="95984878_0" pos="21" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121738_11" lane="95984878_1" pos="21" freq="300" file="simulation.out.xml"/>
-
   <inductionLoop id="121741_00" lane="13703054_0" pos="72.35" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121741_01" lane="13703054_1" pos="72.35" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121741_02" lane="13703054_2" pos="72.35" freq="300" file="simulation.out.xml"/>
@@ -89,16 +79,6 @@
   <inductionLoop id="121742_11" lane="479181462_1" pos="18.5" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121743_12" lane="479181462_2" pos="18.5" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121743_13" lane="13713923#3_0" pos="59.5" freq="300" file="simulation.out.xml"/>
-
-  <inductionLoop id="121745_20" lane="453274489_0" pos="27.3" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121745_21" lane="453274489_1" pos="27.3" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121745_22" lane="453274489_2" pos="27.3" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121745_30" lane="453275800_0" pos="4.65" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121745_31" lane="453275800_1" pos="4.65" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121745_32" lane="453275800_2" pos="4.65" freq="300" file="simulation.out.xml"/>
-  <inductionLoop id="121745_33" lane="479198376_0" pos="6.05" freq="300" file="simulation.out.xml"/>
-
-  <inductionLoop id="121746_0" lane="95127165#5_0" pos="5.38" freq="300" file="simulation.out.xml"/>
 
   <inductionLoop id="121754_00" lane="95117794_0" pos="220" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121754_01" lane="95117794_1" pos="220" freq="300" file="simulation.out.xml"/>
@@ -115,4 +95,3 @@
   <inductionLoop id="121756_10" lane="95374603_0" pos="51.52" freq="300" file="simulation.out.xml"/>
   <inductionLoop id="121756_11" lane="95374603_1" pos="51.52" freq="300" file="simulation.out.xml"/>
 </additional>
-<!-- <inductionLoop id="121751" lane="362138139_0" pos="74.52" freq="300" file="simulation.out.xml"/> -->
