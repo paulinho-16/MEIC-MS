@@ -1,0 +1,549 @@
+%% bare_conf.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+\documentclass[conference]{IEEEtran}
+% Some Computer Society conferences also require the compsoc mode option,
+% but others use the standard conference format.
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference]{../sty/IEEEtran}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+\usepackage{amsmath}
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/pkg/ifpdf
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+%\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of the IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/pkg/cite
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at: 
+% http://www.ctan.org/pkg/graphicx
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/pkg/epslatex
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+%\else
+%  \usepackage[caption=false,font=footnotesize]{subfig}
+%\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a larger sans serif font
+% than the serif footnote size font used in traditional IEEE formatting
+% and thus the need to invoke different subfig.sty package options depending
+% on whether compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/pkg/subfig
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure.
+% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
+% corrections already built into the system in which case a warning will
+% be issued if an attempt is made to load fixltx2e.sty as it is no longer
+% needed.
+% The latest version and documentation can be found at:
+% http://www.ctan.org/pkg/fixltx2e
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/stfloats
+% Do not use the stfloats baselinefloat ability as the IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that the IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/pkg/dblfloatfix
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/url
+% Basically, \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{VCI Descriptive Model}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{
+\IEEEauthorblockN{Diogo Samuel Fernandes}
+\IEEEauthorblockA{Faculty of Engineering\\
+University of Porto\\
+Porto, Portugal\\
+up201806250@up.pt}
+\and
+\IEEEauthorblockN{Juliane Marubayashi}
+\IEEEauthorblockA{Faculty of Engineering\\
+University of Porto\\
+Porto, Portugal\\
+up201800175@up.pt}
+\and
+\IEEEauthorblockN{Paulo Ribeiro}
+\IEEEauthorblockA{Faculty of Engineering\\
+University of Porto\\
+Porto, Portugal\\
+up201806505@up.pt}
+}
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract
+\begin{abstract}
+As the social sciences and real-world structures increase in complexity, the modern community must find other alternatives to analyze and solve problems. Simulations arise in this context to find solutions and verify the consequences of possible actions. 
+Given the high load of vehicles on Porto's main motorway (VCI) and its current problems, this paper describes how we developed a descriptive model of the VCI and analyzed how good our prototype is. 
+Creating such a model eases future work on testing new hypotheses and validating solutions to improve the traffic on this motorway. 
+\end{abstract}
+
+\IEEEpeerreviewmaketitle
+
+
+\section{Introduction}
+Porto is the city with the highest affluence of cars in Portugal. The increased traffic causes many problems, such as excessive pollution and stress. % Motivation
+
+In the context of smart cities, a large amount of data from the VCI (Via de Cintura Interna) motorway was gathered by inductive-loop sensors underneath the pavement all over the VCI. 
+With this data, it is possible to recreate the observed and measured traffic on the streets in a simulation to test new ideas and solutions for improving traffic performance in real cities. % Goals and problem statement
+
+This paper is structured as follows. Section 2 presents the methodological approach followed to reach the results. Section 3 discusses the results. Section 4 indicates similar works to this one. Finally, Section 5 concludes with future work on the descriptive model. % structure of the manuscript
+
+\section{Methodological Approach}
+
+\subsection{Simulation Assumptions and Requirements}
+The simulation environment only considers cars from categories A and B, which can be generated at any entry point of this highway and end the simulation at any exit point. Another constraint in this model forbids cars from driving in the reverse direction.
+
+\subsection{Dataset Description}
+
+The data we obtained comes from inductive-loop sensors installed underneath the pavement all over the VCI inner ring in Porto, capable of gathering traffic information.
+Since this data was provided to us by the professor, no data collection steps will be necessary. However, we must process the data to use it as input for the model developed in SUMO. For this, it may be necessary to analyze all variables and their probability distributions, and a great understanding of their characteristics is essential for the project's success.
+The data provided corresponds to 2013 (although this year's data are incomplete due to concession problems), and we also have access to both the 2014 and 2015 semesters.
+These are aggregated data in five-minute periods. In other words, for each interval of that time, we have access to an aggregated calculation that gives us, for example, the total number of cars that passed by the sensor in that period or the average speed.
+The data contains many attributes, including the number of vehicles of each class (A, B, C or D) that passed through the sensor, from which we only consider the first two.
+
+Here we highlight the most relevant ones for our project:
+
+\begin{itemize}
+    \item \textit{EQUIPMENT\_ID}: the sensor's unique ID;
+    \item \textit{LANE\_NR}: the current lane number where the data is measured;
+    \item \textit{LANE\_DIRECTION}: the current lane direction where the data is measured. May take the values "C" or "D", which mean ascending and decreasing, respectively;
+    \item \textit{VOLUME\_CLASS\_A}: Number of vehicles of class A that pass through the sensor;
+    \item \textit{VOLUME\_CLASS\_B}: Number of vehicles of class B that pass through the sensor;
+    \item \textit{AVG\_SPEED\_ARITHMETIC}: Arithmetic average speed of vehicles that pass through the sensor;
+    \item \textit{AVG\_SPEED\_HARMONIC}: Harmonic average speed of vehicles that pass through the sensor;
+    \item \textit{AGG\_PERIOD\_LEN\_MINS}: time between each measurement the sensors made (in this case, it is always five minutes);
+    \item \textit{AGG\_PERIOD\_START}: time interval when the data was collected, with the format "Year-Month-Day Hour:Minutes:Seconds";
+\end{itemize}
+
+Additionally, we also have access to the properties of each sensor, like the identification of the street it covers. Nevertheless, for this project, it was enough for us to use the following attributes:
+
+\begin{itemize}
+    \item \textit{EQUIPMENT\_ID}: the sensor's unique ID, allowing us to establish relationships with the traffic data files;
+    \item \textit{LATITUDE}: the latitude of the sensor;
+    \item \textit{LONGITUDE}: the longitude of the sensor;
+\end{itemize}
+
+This information allows us to locate the sensors on the map to create a digital version of them, which is necessary to collect the simulation data.
+
+\subsection{Modelling Approach}
+\label{modelling-approach}
+We divided the modelling approach into three main processes:
+\begin{itemize}
+    \item Generate the routes for each origin-destination pair;  
+    \item Generate the origin-destination matrix containing all the possible entering and exiting nodes of the map; 
+    \item Calibrate the current model. 
+\end{itemize}
+% About generating the route for each origin destination pair. 
+
+Each entry in the OD matrix is represented as a triple $(O\times D \times N)$. $N$ is the number of cars with $O$ as the origin and $D$ as the destination node. To avoid repeating the task numerous times, routes for each $(o,d)$ pair were pre-calculated with the sumolib method (i.e., getShortestPath) and saved in a file. 
+
+To generate the OD matrix $M$, the model gathers the real data and stipulates the number of cars that go from a node $o$ to a destination $d$. Firstly, we processed the real data by calculating the average volume of vehicles per hour for each sensor between 8 a.m. and 10:30 a.m. in 2015.
+The average volume of each sensor $i$ located at an edge $e_i$ was equally distributed among each pair $(o_j, d_j) \in M$, where $e_i \in E_j$.  Therefore, the value $N$ for an arbitrary pair $(o,d)$ is equals to:
+
+$$ \sum_{0}^{i=n} \frac{v_i}{m_i} $$
+
+Where $n$ is the number of sensors that pass through the route of $(o,d)$, $v_i$ is the average volume of the sensor $i$, and $m_i$ is the number of paths that the sensor passes through. 
+
+The main goal of the calibration step is to run the simulation, compare it with the produced values in the real data and calculate the error as approached in the next section for the many different scenarios described at \ref{scenarios}.
+
+\subsection{KPIs}
+
+For the calibration process of our model, it will be necessary to define a  Key Performance Indicator, a measurable value that demonstrates how effectively the model represents the actual traffic on VCI.
+This metric could consist of an error that reflects the differences between the real data and the data produced by the simulation. Our main objective would be to reduce this value as much as possible, bringing our model closer to reality and thus achieving the goal of creating a reliable descriptive model of the VCI.
+It is necessary to decide which traffic attributes to consider. We base the error calculation on three of them: the total volume of cars that entered and left the sensor road during the observation, the arithmetic average speed, and the harmonic average speed.
+We used the mean absolute error, which corresponds to the sum of the absolute values of the differences between the data and is given by:
+
+\[ MAE = \frac{\sum_{i=1}^{n} \lvert y_{i}-x_{i} \rvert }{n} = \frac{\sum_{i=1}^{n} \lvert e_{i} \rvert }{n} \]
+
+In this formula, \textit{n} is the number of observations, \textit{y} is the real sensor values, \textit{x} is the SUMO sensor values, and \textit{e} is the resulting difference between both values.
+We chose this error measure because it is less sensitive to outliers, which are very frequent in inductive loop data detectors, due to the difficulty of obtaining accurate and noise-free data from the sensors.
+
+\section{Results and Discussion}
+\label{scenarios}
+\subsection{Scenarios}
+
+To calibrate the model, we followed an optimization process through simulation, where we tested various scenarios to find out which was closest to the actual traffic behavior on the VCI.
+
+As explained in subsection \ref{modelling-approach}, before each simulation, we define an enumeration of the existing OD pairs and, for each, the number of cars that should depart from that origin and leave at that destination.
+After creating the default matrix $M$ described in that subsection, we produced five scenarios, which proportionally reduced the number of vehicles in the simulation.
+
+Although SUMO is a powerful tool, we assumed that the high number of cars in the simulation could cause overhead and increase the error. Considering that $M$ contains 100\% of the vehicles that were supposed to be on the simulation, we have created other matrices containing 10\%, 25\%, 50\%, and 75\% of the cars: $M_{10}$, $M_{25}$, $M_{50}$, and $M_{75}$.
+
+We then run a simulation for each of these matrices and store the error value returned.
+In subsection \ref{results}, we describe these results in detail for both assessment levels previously described (five-minute blocks and one-hour blocks).
+
+    \subsection{Experiments}
+To determine the accuracy of the simulation results, two main methods for calculating errors are used. The first approach involves comparing the output from the simulation software (SUMO) with each individual record of the real data (five-minute blocks). The second method involves calculating the volume of cars in each simulated sensor per hour (grouping data into one-hour blocks), and then comparing that result with the same calculation performed on the real data. This second approach provides a less demanding comparison because the accumulated error is more significant in blocks of five minutes. The next subsection describes the results of both these approaches.
+
+\subsection{Results}
+\label{results}
+We performed a thorough evaluation of various traffic scenarios on the VCI to determine which scenario closely mimics real-world traffic behaviour. The study was designed to measure the realism of the traffic scenarios by analyzing the maximum value in each scenario, which represents the total number of vehicles resulting from the equal distribution of flows from each sensor among the Origin-Destination (OD) pairs whose routes pass through them. The results of this analysis can be seen on Table \ref{table:results1} and Table \ref{table:results2}.
+
+\begin{table}[h] 
+\centering
+\caption{Results of first strategy}\label{table:results1}
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\textbf{10\%} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{100\%} \\ [0.5ex] 
+\hline
+ 47,576.070 & 46,954.375 & 46,835.290 & 47,223.463 & 47,029.250 \\ [1ex] 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h] 
+\centering
+\caption{Results of the second strategy}\label{table:results2}
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\textbf{10\%} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{100\%} \\ [0.5ex] 
+\hline
+ 4,671.672 & 4,485.051 & 4,412.266 & 4,346.030 & 4,193.740
+ \\ [1ex] 
+\hline
+\end{tabular}
+\end{table}
+
+\section{Related Work}
+In the literature, other investigations are related to VCI (e.g., \cite{Rossetti:predictionFlow} and \cite{Rossetti:mimicTraffic}). In contrast with our project, the previous studies mainly focus on how to collect data from roads and how to extract knowledge. Although different strategies were applied, this paper shares the same goal from previous works: improving the VCI traffic system. 
+
+\section{Conclusion}
+This project creates a descriptive model of the VCI, to test new scenarios, understand its current problems and prescribe new solutions for future improvement. 
+We've successfully applied modelling methodologies to enhance and validate the descriptive model. Although the error is still significant, by exploring more scenarios, the variation of the error will follow a diminishing marginal return and stabilize at some moment. 
+Future work will involve more in-depth testing of different scenarios in order to bring the model even closer to reality. To complement this work, prescriptive and predictive models could also be built, which could be useful in traffic forecasting, providing important information for traffic control centres.
+
+% conference papers do not normally have an appendix
+
+
+% use section* for acknowledgment
+\section*{Acknowledgment}
+This report contains the work done in the curricular unit Modelling and Simulation lectured by professor Rosaldo Rossetti at the Faculty of Engineering of the University of Porto. 
+\begin{thebibliography}{1}
+
+\bibitem{Rossetti:predictionFlow}
+I. Alam, D. Md. Farid, and R. J. F. Rossetti, “The Prediction of Traffic Flow with Regression Analysis,” in Emerging Technologies in Data Mining and Information Security, 2019, pp. 661–671.
+
+\bibitem{Rossetti:mimicTraffic}
+Alam et al., "Pattern mining from historical traffic big data," 2017 IEEE Region 10 Symposium (TENSYMP), Cochin, India, 2017, pp. 1-5, doi: 10.1109/TENCONSpring.2017.8070031.
+
+
+\end{thebibliography}
+
+
+
+
+% that's all folks
+\end{document}
+
+
