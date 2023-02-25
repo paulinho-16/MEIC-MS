@@ -1,0 +1,31 @@
+# VCI data
+data/od_route_file.odtrips.rou.alt.xml
+data/od_route_file.odtrips.rou.xml
+data/vci.od
+data/vci.taz.xml
+data/vci.trips.xml
+data/vci.rou.xml
+data/VCI/*
+
+# VCI sensors data
+data/desktop.ini
+data/README AEDL2013-2015.txt
+data/sensors_location.csv
+data/significado campos.txt
+data/AEDL2013_2015/*
+!data/AEDL2013_2015/*_MorningRushHour.csv
+!data/AEDL2013_2015/*_EveningRushHour.csv
+!data/simulation/*
+
+# Example 
+example/*
+
+# Python virtual environment
+env/
+venv/
+
+# Pycache
+*.pyc
+src/__pycache__/*
+src/dataProcessing/__pycache__
+src/sumo/__pycache__

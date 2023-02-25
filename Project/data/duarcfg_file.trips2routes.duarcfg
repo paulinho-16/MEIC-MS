@@ -1,0 +1,10 @@
+<configuration> 
+    <input> 
+        <net-file value="./vci.net.xml"/> 
+        <route-files value="./vci.trips.xml"/>
+    </input>
+
+    <output>
+        <output-file value="./od_route_file.odtrips.rou.xml"/>
+    </output> 
+</configuration> 

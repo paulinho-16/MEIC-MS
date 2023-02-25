@@ -1,0 +1,18 @@
+<configuration>
+    <input>
+        <net-file value="vci.net.xml"/>
+        <route-files value="vci.rou.xml"/>
+        <additional-files value="detectors.add.xml"/>
+    </input>
+    <time>
+        <begin value="0"/> 
+        <end value="9000"/> 
+    </time>
+    <processing>
+        <time-to-teleport value="0"/>
+    </processing>
+    <report>
+        <no-duration-log value="true"/>
+        <no-step-log value="true"/>
+    </report>
+</configuration>
